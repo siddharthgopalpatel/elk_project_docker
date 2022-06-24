@@ -89,9 +89,9 @@ setup.kibana:
 # Configure what output to use when sending the data collected by the beat.
 
 # ---------------------------- Elasticsearch Output ----------------------------
-#output.elasticsearch:
+output.elasticsearch:
   # Array of hosts to connect to.
-  #hosts: ["elasticsearch:9200"]
+  hosts: ["elasticsearch:9200"]
 
   # Protocol - either `http` (default) or `https`.
   #protocol: "https"
@@ -102,9 +102,9 @@ setup.kibana:
   #password: "changeme"
 
 # ------------------------------ Logstash Output -------------------------------
-output.logstash:
+#output.logstash:
   # The Logstash hosts
-  hosts: ["logstash:5044"]
+  #hosts: ["logstash:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
@@ -132,6 +132,12 @@ processors:
 # Sets log level. The default log level is info.
 # Available log levels are: error, warning, info, debug
 logging.level: debug
+logging.to_files: true
+logging.files:
+  path: /var/log/metricbeat
+  name: metricbeat
+  keepfiles: 7
+  permissions: 0644
 
 # At debug level, you can selectively enable logging only for some components.
 # To enable all selectors use ["*"]. Examples of other selectors are "beat",
