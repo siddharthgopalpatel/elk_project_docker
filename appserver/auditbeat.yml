@@ -58,7 +58,7 @@ auditbeat.modules:
     - host    # General host information, e.g. uptime, IPs
     - login   # User logins, logouts, and system boots.
     - process # Started and stopped processes
-    - socket  # Opened and closed sockets
+      #- socket  # Opened and closed sockets
     - user    # User information
 
   # How often datasets send state updates with the
@@ -193,7 +193,7 @@ logging.to_files: true
 logging.files:
   path: /var/log/auditbeat
   name: auditbeat
-  keepfiles: 7
+  keepfiles: 2
   permissions: 0644
 
 # At debug level, you can selectively enable logging only for some components.
