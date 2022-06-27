@@ -29,20 +29,20 @@ services:
     depends_on:
       - elasticsearch
 
-  logstash:
-    build:
-      context: logstash/
-      dockerfile: logstash_dockerfile
-    image: logstashimage
-    container_name: logstash
-    restart: unless-stopped
-    ports:
-      - "5044:5044"
-    tty: true
-    networks:
-      - elk_network
-    depends_on:
-      - elasticsearch
+        #logstash:
+        #build:
+        #context: logstash/
+        #dockerfile: logstash_dockerfile
+        #image: logstashimage
+        #container_name: logstash
+        #restart: unless-stopped
+        #ports:
+        #- "5044:5044"
+        #tty: true
+        #networks:
+        #- elk_network
+        #depends_on:
+        #- elasticsearch
 
 
   webserver:
@@ -52,6 +52,21 @@ services:
     image: webserverimage
     container_name: webserver
     restart: unless-stopped
+      #ports:
+      #- "80:80"
+    tty: true
+    networks:
+      - elk_network
+    depends_on:
+      - kibana
+
+  appserver:
+    build:
+      context: appserver/
+      dockerfile: appserver_dockerfile
+    image: appserverimage
+    container_name: appserver
+    restart: unless-stopped
     ports:
       - "80:80"
     tty: true
@@ -60,8 +75,6 @@ services:
     depends_on:
       - kibana
 
-
 networks:
   elk_network:
     driver: bridge
-
